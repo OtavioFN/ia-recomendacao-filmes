@@ -148,15 +148,15 @@
   </rdfs:subClassOf>
   <rdfs:subClassOf>
     <owl:Restriction>
-      <owl:onProperty rdf:resource="#temGenero"/>
-      <owl:someValuesFrom rdf:resource="#Genero"/>
+      <owl:onProperty rdf:resource="#idadeMinima"/>
+      <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf>
     <owl:Restriction>
-      <owl:onProperty rdf:resource="#idadeMinima"/>
-      <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+      <owl:onProperty rdf:resource="#temGenero"/>
+      <owl:someValuesFrom rdf:resource="#Genero"/>
     </owl:Restriction>
   </rdfs:subClassOf>
 </owl:Class>
