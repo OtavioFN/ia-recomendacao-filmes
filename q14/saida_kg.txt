@@ -1,0 +1,19 @@
+triplas declaradas: 68
+
+Consultas ANTES da inferencia:
+  instancias de Pesquisador: []
+
+regra CONSTRUCT (coautoria): novas triplas coautorDe = 16
+fecho OWL RL: 84 -> 276 triplas (inclui triplas triviais do proprio OWL RL)
+Ana e Pessoa? True | Ana contribuiPara P1? True | Bruno coautorDe Ana (simetria)? True
+
+Consultas DEPOIS da inferencia:
+  autores e instituicoes em Aprendizado de Maquina: [('Ana', 'UFAL'), ('Bruno', 'UFAL'), ('Carla', 'UFPE'), ('Davi', 'UFPE'), ('Hugo', 'UFPE')]
+  instancias de Pesquisador (exige inferencia de subclasses): [('Ana',), ('Bruno',), ('Carla',), ('Davi',), ('Elisa',), ('Felipe',), ('Gabi',), ('Hugo',)]
+  nao coautores a 2 saltos de Ana (caminho de propriedades): [('Carla',), ('Felipe',), ('Hugo',)]
+  especialistas (>= 2 artigos no mesmo topico): [('Davi', 'AprendizadoDeMaquina', '2'), ('Felipe', 'IoT', '2'), ('Gabi', 'Robotica', '2'), ('Hugo', 'Robotica', '2'), ('Bruno', 'VisaoComputacional', '2')]
+
+recomendacao de colaboracoes para Ana:
+  Carla: score 5, topicos em comum ['AprendizadoDeMaquina', 'VisaoComputacional'], via ['Bruno']
+  Hugo: score 5, topicos em comum ['AprendizadoDeMaquina', 'Robotica'], via ['Gabi']
+  Felipe: score 1, topicos em comum [], via ['Gabi']

@@ -1,0 +1,15 @@
+tarefa: prever `pesquisaEm` | entidades: 552 | relacoes: 5 | triplas: 2142 (treino 2100, validacao 12, teste 30) | candidatos: 8
+  validacao: lr=0.01, epocas=100 -> MRR 0.889
+  validacao: lr=0.01, epocas=200 -> MRR 0.944
+  validacao: lr=0.03, epocas=100 -> MRR 0.872
+  validacao: lr=0.03, epocas=200 -> MRR 0.885
+  validacao: lr=0.1, epocas=100 -> MRR 0.788
+  validacao: lr=0.1, epocas=200 -> MRR 0.739
+hiperparametros escolhidos: lr=0.01, epocas=200
+
+TESTE (ranqueamento filtrado, `pesquisaEm`):
+  metodo                               MRR   Hits@1   Hits@3  Hits@10
+  aleatorio                          0.392    0.233    0.367    1.000
+  caminhos (topicos dos artigos)     1.000    1.000    1.000    1.000
+  TransE (media de 5 sementes)       0.993    0.987    1.000    1.000
+    desvio padrao                    0.013    0.027    0.000    0.000
