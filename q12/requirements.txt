@@ -1,0 +1,4 @@
+# Instale apenas o pacote do provedor que for usar.
+# Nao sao necessarios para os testes nem para o modo simulado.
+anthropic
+openai
