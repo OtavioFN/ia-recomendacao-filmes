@@ -1,0 +1,40 @@
+== ontologia consistente? SIM (o raciocinador terminou sem erro)
+== classes insatisfativeis (equivalentes a owl:Nothing): ['FilmeESerie', 'Nothing']
+== ObraInfantil e subclasse de ObraAcessivelAMenores? True
+== ObraAdulta e subclasse de ObraAcessivelAMenores? False
+== superclasses inferidas de FilmeInfantilAclamado: ['Consulta0', 'Filme', 'ObraAcessivelAMenores', 'ObraAclamada', 'ObraAudiovisual', 'ObraInfantil']
+== instancias de FilmeInfantilAclamado: ['pequenos_inventores']
+== instancias de UsuarioDeFiccaoCientifica: ['ana']
+== instancias de DiretorDeObraAclamada: ['helena_prado', 'iara_siqueira', 'tomas_albuquerque']
+== instancias de ObraAcessivelAMenores: ['agentes_do_amanha', 'cacada_urbana', 'colonia_7', 'orbita_silenciosa', 'pequenos_inventores', 'plantao_noturno', 'protocolo_zero', 'risos_de_domingo', 'turma_do_quintal', 'ultima_colheita']
+== tipos inferidos (alem dos declarados):
+     agentes_do_amanha      ['Minisserie', 'ObraAcessivelAMenores', 'ObraDeAcao', 'ObraDeFiccaoCientifica']
+     ana                    ['UsuarioDeFiccaoCientifica']
+     cacada_urbana          ['ObraAcessivelAMenores', 'ObraDeAcao']
+     colonia_7              ['ObraAcessivelAMenores', 'ObraAclamada']
+     fronteira_vermelha     ['ObraAdulta', 'ObraDeAcao']
+     helena_prado           ['DiretorDeObraAclamada']
+     iara_siqueira          ['DiretorDeObraAclamada']
+     joao                   ['UsuarioMenorDeIdade']
+     lucas                  ['UsuarioMenorDeIdade']
+     pequenos_inventores    ['FilmeInfantilAclamado']
+     plantao_noturno        ['ObraAcessivelAMenores', 'ObraAclamada']
+     protocolo_zero         ['ObraAcessivelAMenores', 'ObraDeAcao']
+     risos_de_domingo       ['ObraInfantil']
+     tomas_albuquerque      ['DiretorDeObraAclamada']
+     turma_do_quintal       ['ObraInfantil']
+     ultima_colheita        ['ObraAcessivelAMenores']
+     vale_das_sombras       ['ObraAdulta']
+== prefereGenero de ana (cadeia de propriedades): ['Drama', 'FiccaoCientifica']
+== consultas DL (resultado esperado no separador DL Query):
+     Filme and ObraAclamada
+        -> ['orbita_silenciosa', 'pequenos_inventores', 'ultima_colheita']
+     ObraDeFiccaoCientifica and (disponivelEm value StreamA)
+        -> ['colonia_7', 'orbita_silenciosa', 'protocolo_zero']
+     Usuario and (prefereGenero value Drama)
+        -> ['ana', 'marina']
+     ObraAudiovisual and (disponivelEm value StreamA) and (idadeMinima some xsd:integer[<= 13])
+        -> ['orbita_silenciosa', 'pequenos_inventores', 'risos_de_domingo', 'turma_do_quintal']
+
+== ontologia INCONSISTENTE:
+   o HermiT acusa inconsistencia (obra_invalida e Filme e Serie, que sao disjuntas)

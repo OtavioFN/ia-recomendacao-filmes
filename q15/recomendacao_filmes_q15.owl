@@ -1,0 +1,750 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xml:base="http://example.org/recomendacao-filmes.owl"
+         xmlns="http://example.org/recomendacao-filmes.owl#">
+
+<owl:Ontology rdf:about="http://example.org/recomendacao-filmes.owl"/>
+
+<owl:ObjectProperty rdf:about="#temGenero">
+  <rdfs:domain rdf:resource="#ObraAudiovisual"/>
+  <rdfs:range rdf:resource="#Genero"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#temDiretor">
+  <rdfs:domain rdf:resource="#ObraAudiovisual"/>
+  <rdfs:range rdf:resource="#Diretor"/>
+  <owl:inverseOf rdf:resource="#dirigiu"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#dirigiu">
+  <owl:inverseOf rdf:resource="#temDiretor"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#disponivelEm">
+  <rdfs:domain rdf:resource="#ObraAudiovisual"/>
+  <rdfs:range rdf:resource="#Plataforma"/>
+  <owl:inverseOf rdf:resource="#oferece"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#oferece">
+  <owl:inverseOf rdf:resource="#disponivelEm"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#assinaPlataforma">
+  <rdfs:domain rdf:resource="#Usuario"/>
+  <rdfs:range rdf:resource="#Plataforma"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#assistiu">
+  <rdfs:domain rdf:resource="#Usuario"/>
+  <rdfs:range rdf:resource="#ObraAudiovisual"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#gostouDe">
+  <rdfs:subPropertyOf rdf:resource="#assistiu"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#prefereGenero">
+  <rdfs:domain rdf:resource="#Usuario"/>
+  <rdfs:range rdf:resource="#Genero"/>
+  <owl:propertyChainAxiom>
+    <rdf:Description>
+      <rdf:first rdf:resource="#gostouDe"/>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first rdf:resource="#temGenero"/>
+          <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </owl:propertyChainAxiom>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#prefereDiretor">
+  <rdfs:domain rdf:resource="#Usuario"/>
+  <rdfs:range rdf:resource="#Diretor"/>
+  <owl:propertyChainAxiom>
+    <rdf:Description>
+      <rdf:first rdf:resource="#gostouDe"/>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first rdf:resource="#temDiretor"/>
+          <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </owl:propertyChainAxiom>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#recomendadoPara">
+  <rdfs:domain rdf:resource="#ObraAudiovisual"/>
+  <rdfs:range rdf:resource="#Usuario"/>
+  <owl:inverseOf rdf:resource="#temRecomendacao"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#temRecomendacao">
+  <owl:inverseOf rdf:resource="#recomendadoPara"/>
+</owl:ObjectProperty>
+
+<owl:DatatypeProperty rdf:about="#titulo">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#ObraAudiovisual"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#nome">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#Pessoa"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#idade">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#Usuario"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#idadeMinima">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#ObraAudiovisual"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#anoLancamento">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#ObraAudiovisual"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#duracaoMin">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#Filme"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#numTemporadas">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#Serie"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#notaMedia">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#ObraAudiovisual"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+</owl:DatatypeProperty>
+
+<owl:Class rdf:about="#ObraAudiovisual">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#disponivelEm"/>
+      <owl:someValuesFrom rdf:resource="#Plataforma"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#temGenero"/>
+      <owl:someValuesFrom rdf:resource="#Genero"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#idadeMinima"/>
+      <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#Filme">
+  <rdfs:subClassOf rdf:resource="#ObraAudiovisual"/>
+  <owl:disjointWith rdf:resource="#Serie"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#temDiretor"/>
+      <owl:someValuesFrom rdf:resource="#Diretor"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#Serie">
+  <rdfs:subClassOf rdf:resource="#ObraAudiovisual"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#numTemporadas"/>
+      <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#Genero">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Plataforma">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Pessoa">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Diretor">
+  <rdfs:subClassOf rdf:resource="#Pessoa"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Usuario">
+  <rdfs:subClassOf rdf:resource="#Pessoa"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ObraDeFiccaoCientifica">
+  <rdfs:subClassOf rdf:resource="#ObraAudiovisual"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#ObraAudiovisual"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#temGenero"/>
+          <owl:hasValue rdf:resource="#FiccaoCientifica"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#ObraDeAcao">
+  <rdfs:subClassOf rdf:resource="#ObraAudiovisual"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#ObraAudiovisual"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#temGenero"/>
+          <owl:hasValue rdf:resource="#Acao"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#ObraInfantil">
+  <rdfs:subClassOf rdf:resource="#ObraAudiovisual"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#ObraAudiovisual"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#idadeMinima"/>
+          <owl:someValuesFrom>
+            <rdfs:Datatype>
+              <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+              <owl:withRestrictions>
+                <rdf:Description>
+                  <rdf:first>
+                    <rdf:Description>
+                      <xsd:maxInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10</xsd:maxInclusive>
+                    </rdf:Description>
+                  </rdf:first>
+                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                </rdf:Description>
+              </owl:withRestrictions>
+            </rdfs:Datatype>
+          </owl:someValuesFrom>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#ObraAdulta">
+  <rdfs:subClassOf rdf:resource="#ObraAudiovisual"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#ObraAudiovisual"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#idadeMinima"/>
+          <owl:someValuesFrom>
+            <rdfs:Datatype>
+              <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+              <owl:withRestrictions>
+                <rdf:Description>
+                  <rdf:first>
+                    <rdf:Description>
+                      <xsd:minInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">18</xsd:minInclusive>
+                    </rdf:Description>
+                  </rdf:first>
+                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                </rdf:Description>
+              </owl:withRestrictions>
+            </rdfs:Datatype>
+          </owl:someValuesFrom>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#ObraAclamada">
+  <rdfs:subClassOf rdf:resource="#ObraAudiovisual"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#ObraAudiovisual"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#notaMedia"/>
+          <owl:someValuesFrom>
+            <rdfs:Datatype>
+              <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+              <owl:withRestrictions>
+                <rdf:Description>
+                  <rdf:first>
+                    <rdf:Description>
+                      <xsd:minInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">8.0</xsd:minInclusive>
+                    </rdf:Description>
+                  </rdf:first>
+                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                </rdf:Description>
+              </owl:withRestrictions>
+            </rdfs:Datatype>
+          </owl:someValuesFrom>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#Minisserie">
+  <rdfs:subClassOf rdf:resource="#Serie"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#Serie"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#numTemporadas"/>
+          <owl:someValuesFrom>
+            <rdfs:Datatype>
+              <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+              <owl:withRestrictions>
+                <rdf:Description>
+                  <rdf:first>
+                    <rdf:Description>
+                      <xsd:maxInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</xsd:maxInclusive>
+                    </rdf:Description>
+                  </rdf:first>
+                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                </rdf:Description>
+              </owl:withRestrictions>
+            </rdfs:Datatype>
+          </owl:someValuesFrom>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#UsuarioMenorDeIdade">
+  <rdfs:subClassOf rdf:resource="#Usuario"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#Usuario"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#idade"/>
+          <owl:someValuesFrom>
+            <rdfs:Datatype>
+              <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+              <owl:withRestrictions>
+                <rdf:Description>
+                  <rdf:first>
+                    <rdf:Description>
+                      <xsd:maxInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">17</xsd:maxInclusive>
+                    </rdf:Description>
+                  </rdf:first>
+                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                </rdf:Description>
+              </owl:withRestrictions>
+            </rdfs:Datatype>
+          </owl:someValuesFrom>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#FilmeInfantilAclamado">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#Filme"/>
+        <rdf:Description rdf:about="#ObraInfantil"/>
+        <rdf:Description rdf:about="#ObraAclamada"/>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#UsuarioDeFiccaoCientifica">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#Usuario"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#prefereGenero"/>
+          <owl:hasValue rdf:resource="#FiccaoCientifica"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#DiretorDeObraAclamada">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#Diretor"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#dirigiu"/>
+          <owl:someValuesFrom rdf:resource="#ObraAclamada"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#ObraAcessivelAMenores">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#ObraAudiovisual"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#idadeMinima"/>
+          <owl:someValuesFrom>
+            <rdfs:Datatype>
+              <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+              <owl:withRestrictions>
+                <rdf:Description>
+                  <rdf:first>
+                    <rdf:Description>
+                      <xsd:maxInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">17</xsd:maxInclusive>
+                    </rdf:Description>
+                  </rdf:first>
+                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                </rdf:Description>
+              </owl:withRestrictions>
+            </rdfs:Datatype>
+          </owl:someValuesFrom>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#FilmeESerie">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#Filme"/>
+        <rdf:Description rdf:about="#Serie"/>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:NamedIndividual rdf:about="#FiccaoCientifica">
+  <rdf:type rdf:resource="#Genero"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Acao">
+  <rdf:type rdf:resource="#Genero"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Drama">
+  <rdf:type rdf:resource="#Genero"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Comedia">
+  <rdf:type rdf:resource="#Genero"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Terror">
+  <rdf:type rdf:resource="#Genero"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Animacao">
+  <rdf:type rdf:resource="#Genero"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Suspense">
+  <rdf:type rdf:resource="#Genero"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#StreamA">
+  <rdf:type rdf:resource="#Plataforma"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#StreamB">
+  <rdf:type rdf:resource="#Plataforma"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#StreamC">
+  <rdf:type rdf:resource="#Plataforma"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#helena_prado">
+  <rdf:type rdf:resource="#Diretor"/>
+  <nome rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Helena Prado</nome>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#rafael_monteiro">
+  <rdf:type rdf:resource="#Diretor"/>
+  <nome rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rafael Monteiro</nome>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#tomas_albuquerque">
+  <rdf:type rdf:resource="#Diretor"/>
+  <nome rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tomas Albuquerque</nome>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#beatriz_lemos">
+  <rdf:type rdf:resource="#Diretor"/>
+  <nome rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Beatriz Lemos</nome>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#iara_siqueira">
+  <rdf:type rdf:resource="#Diretor"/>
+  <nome rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Iara Siqueira</nome>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#orbita_silenciosa">
+  <rdf:type rdf:resource="#Filme"/>
+  <temGenero rdf:resource="#FiccaoCientifica"/>
+  <temGenero rdf:resource="#Drama"/>
+  <temDiretor rdf:resource="#helena_prado"/>
+  <disponivelEm rdf:resource="#StreamA"/>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Orbita Silenciosa</titulo>
+  <idadeMinima rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">12</idadeMinima>
+  <anoLancamento rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2021</anoLancamento>
+  <notaMedia rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">8.4</notaMedia>
+  <duracaoMin rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">128</duracaoMin>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#protocolo_zero">
+  <rdf:type rdf:resource="#Filme"/>
+  <temGenero rdf:resource="#Acao"/>
+  <temGenero rdf:resource="#FiccaoCientifica"/>
+  <temDiretor rdf:resource="#rafael_monteiro"/>
+  <disponivelEm rdf:resource="#StreamA"/>
+  <disponivelEm rdf:resource="#StreamB"/>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Protocolo Zero</titulo>
+  <idadeMinima rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">14</idadeMinima>
+  <anoLancamento rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2023</anoLancamento>
+  <notaMedia rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">7.6</notaMedia>
+  <duracaoMin rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">115</duracaoMin>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#cacada_urbana">
+  <rdf:type rdf:resource="#Filme"/>
+  <temGenero rdf:resource="#Acao"/>
+  <temGenero rdf:resource="#Suspense"/>
+  <temDiretor rdf:resource="#rafael_monteiro"/>
+  <disponivelEm rdf:resource="#StreamB"/>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Cacada Urbana</titulo>
+  <idadeMinima rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">16</idadeMinima>
+  <anoLancamento rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2019</anoLancamento>
+  <notaMedia rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">7.1</notaMedia>
+  <duracaoMin rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">102</duracaoMin>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#ultima_colheita">
+  <rdf:type rdf:resource="#Filme"/>
+  <temGenero rdf:resource="#Drama"/>
+  <temDiretor rdf:resource="#helena_prado"/>
+  <disponivelEm rdf:resource="#StreamC"/>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A Ultima Colheita</titulo>
+  <idadeMinima rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">12</idadeMinima>
+  <anoLancamento rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2018</anoLancamento>
+  <notaMedia rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">8.7</notaMedia>
+  <duracaoMin rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">140</duracaoMin>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#risos_de_domingo">
+  <rdf:type rdf:resource="#Filme"/>
+  <temGenero rdf:resource="#Comedia"/>
+  <temDiretor rdf:resource="#tomas_albuquerque"/>
+  <disponivelEm rdf:resource="#StreamA"/>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Risos de Domingo</titulo>
+  <idadeMinima rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</idadeMinima>
+  <anoLancamento rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2022</anoLancamento>
+  <notaMedia rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">6.9</notaMedia>
+  <duracaoMin rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">95</duracaoMin>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#vale_das_sombras">
+  <rdf:type rdf:resource="#Filme"/>
+  <temGenero rdf:resource="#Terror"/>
+  <temDiretor rdf:resource="#beatriz_lemos"/>
+  <disponivelEm rdf:resource="#StreamB"/>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">O Vale das Sombras</titulo>
+  <idadeMinima rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">18</idadeMinima>
+  <anoLancamento rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2020</anoLancamento>
+  <notaMedia rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">7.3</notaMedia>
+  <duracaoMin rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">98</duracaoMin>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#pequenos_inventores">
+  <rdf:type rdf:resource="#Filme"/>
+  <temGenero rdf:resource="#Animacao"/>
+  <temGenero rdf:resource="#Comedia"/>
+  <temDiretor rdf:resource="#iara_siqueira"/>
+  <disponivelEm rdf:resource="#StreamA"/>
+  <disponivelEm rdf:resource="#StreamC"/>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pequenos Inventores</titulo>
+  <idadeMinima rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</idadeMinima>
+  <anoLancamento rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2024</anoLancamento>
+  <notaMedia rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">8.1</notaMedia>
+  <duracaoMin rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">88</duracaoMin>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#fronteira_vermelha">
+  <rdf:type rdf:resource="#Filme"/>
+  <temGenero rdf:resource="#Acao"/>
+  <temDiretor rdf:resource="#beatriz_lemos"/>
+  <disponivelEm rdf:resource="#StreamC"/>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fronteira Vermelha</titulo>
+  <idadeMinima rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">18</idadeMinima>
+  <anoLancamento rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2021</anoLancamento>
+  <notaMedia rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">7.8</notaMedia>
+  <duracaoMin rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">121</duracaoMin>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#colonia_7">
+  <rdf:type rdf:resource="#Serie"/>
+  <temGenero rdf:resource="#FiccaoCientifica"/>
+  <temGenero rdf:resource="#Suspense"/>
+  <temDiretor rdf:resource="#helena_prado"/>
+  <disponivelEm rdf:resource="#StreamA"/>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Colonia 7</titulo>
+  <idadeMinima rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">14</idadeMinima>
+  <anoLancamento rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2022</anoLancamento>
+  <notaMedia rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">8.5</notaMedia>
+  <numTemporadas rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</numTemporadas>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#plantao_noturno">
+  <rdf:type rdf:resource="#Serie"/>
+  <temGenero rdf:resource="#Drama"/>
+  <temDiretor rdf:resource="#tomas_albuquerque"/>
+  <disponivelEm rdf:resource="#StreamB"/>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Plantao Noturno</titulo>
+  <idadeMinima rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">16</idadeMinima>
+  <anoLancamento rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2017</anoLancamento>
+  <notaMedia rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">8.2</notaMedia>
+  <numTemporadas rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</numTemporadas>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#agentes_do_amanha">
+  <rdf:type rdf:resource="#Serie"/>
+  <temGenero rdf:resource="#Acao"/>
+  <temGenero rdf:resource="#FiccaoCientifica"/>
+  <temDiretor rdf:resource="#rafael_monteiro"/>
+  <disponivelEm rdf:resource="#StreamC"/>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Agentes do Amanha</titulo>
+  <idadeMinima rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">12</idadeMinima>
+  <anoLancamento rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2024</anoLancamento>
+  <notaMedia rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">7.4</notaMedia>
+  <numTemporadas rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</numTemporadas>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#turma_do_quintal">
+  <rdf:type rdf:resource="#Serie"/>
+  <temGenero rdf:resource="#Animacao"/>
+  <temDiretor rdf:resource="#iara_siqueira"/>
+  <disponivelEm rdf:resource="#StreamA"/>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Turma do Quintal</titulo>
+  <idadeMinima rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</idadeMinima>
+  <anoLancamento rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2020</anoLancamento>
+  <notaMedia rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">7.9</notaMedia>
+  <numTemporadas rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</numTemporadas>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#ana">
+  <rdf:type rdf:resource="#Usuario"/>
+  <prefereGenero rdf:resource="#FiccaoCientifica"/>
+  <assinaPlataforma rdf:resource="#StreamA"/>
+  <assinaPlataforma rdf:resource="#StreamB"/>
+  <gostouDe rdf:resource="#orbita_silenciosa"/>
+  <nome rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ana</nome>
+  <idade rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">25</idade>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#lucas">
+  <rdf:type rdf:resource="#Usuario"/>
+  <prefereGenero rdf:resource="#Acao"/>
+  <assinaPlataforma rdf:resource="#StreamA"/>
+  <assinaPlataforma rdf:resource="#StreamC"/>
+  <gostouDe rdf:resource="#pequenos_inventores"/>
+  <nome rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Lucas</nome>
+  <idade rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">13</idade>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#marina">
+  <rdf:type rdf:resource="#Usuario"/>
+  <prefereGenero rdf:resource="#Drama"/>
+  <assinaPlataforma rdf:resource="#StreamB"/>
+  <assinaPlataforma rdf:resource="#StreamC"/>
+  <assistiu rdf:resource="#plantao_noturno"/>
+  <nome rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Marina</nome>
+  <idade rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">40</idade>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#joao">
+  <rdf:type rdf:resource="#Usuario"/>
+  <prefereGenero rdf:resource="#Terror"/>
+  <prefereGenero rdf:resource="#Acao"/>
+  <assinaPlataforma rdf:resource="#StreamB"/>
+  <nome rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Joao</nome>
+  <idade rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">17</idade>
+</owl:NamedIndividual>
+
+<owl:AllDifferent>
+  <owl:distinctMembers rdf:parseType="Collection">
+    <rdf:Description rdf:about="#StreamA"/>
+    <rdf:Description rdf:about="#StreamB"/>
+    <rdf:Description rdf:about="#StreamC"/>
+  </owl:distinctMembers>
+</owl:AllDifferent>
+
+<owl:AllDifferent>
+  <owl:distinctMembers rdf:parseType="Collection">
+    <rdf:Description rdf:about="#FiccaoCientifica"/>
+    <rdf:Description rdf:about="#Acao"/>
+    <rdf:Description rdf:about="#Drama"/>
+    <rdf:Description rdf:about="#Comedia"/>
+    <rdf:Description rdf:about="#Terror"/>
+    <rdf:Description rdf:about="#Animacao"/>
+    <rdf:Description rdf:about="#Suspense"/>
+  </owl:distinctMembers>
+</owl:AllDifferent>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#ObraAudiovisual"/>
+    <rdf:Description rdf:about="#Genero"/>
+    <rdf:Description rdf:about="#Plataforma"/>
+    <rdf:Description rdf:about="#Pessoa"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+
+</rdf:RDF>
